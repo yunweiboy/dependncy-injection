@@ -1,9 +1,8 @@
 package main
 
 import (
-	"dependncy-injection/business"
-	"dependncy-injection/database"
 	"dependncy-injection/service"
+	"dependncy-injection/wire"
 	"fmt"
 )
 
@@ -24,9 +23,7 @@ func (c Client) MakeRequest() string {
 
 func main() {
 	// make dependency injection manually
-	db := database.NewDatabase()
-	logic := business.NewBusiness(db)
-	svc := service.NewService(logic)
+	svc := wire.InitializeService()
 	client := NewClient(svc)
 
 	fmt.Println(client.MakeRequest())
